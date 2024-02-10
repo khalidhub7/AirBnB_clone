@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-file_storage that manages storage
+file_storage that manages
+our storage
 """
 
 import json
@@ -24,13 +25,9 @@ class FileStorage:
         return FileStorage.__objects
 
     def new(self, obj):
-        """
-        Add new object to objects dictionary
-        """
-        class_name = obj.__class__.__name__
-        obj_id = obj.id
-        key = f"{class_name}.{obj_id}"
-        FileStorage.__objects[key] = obj
+        """ Add new object to objects dictionary """
+        FileStorage.__objects["{}.{}\
+".format(obj.to_dict()['__class__'], obj.id)] = obj
 
     def save(self):
         """ Save objects to json file """
