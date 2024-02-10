@@ -5,8 +5,8 @@ base model parent of other classes
 
 from datetime import datetime
 import uuid
-#from models.engine import file_storage
-#import models
+from models.engine import file_storage
+import models
 
 
 class BaseModel:
@@ -42,7 +42,7 @@ class BaseModel:
                     self.updated_at = kwargs[i]
                 else:
                     setattr(self, i, kwargs[i])
-            #models.storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """
@@ -55,7 +55,7 @@ class BaseModel:
         updates the public instance attribute updated_at
         """
         self.updated_at = datetime.now()
-        #models.storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """
