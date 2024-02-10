@@ -29,7 +29,7 @@ class BaseModel:
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
-        if kwargs:
+        """ if kwargs:
             for i in kwargs:
                 if i == "__class__":
                     pass
@@ -40,7 +40,21 @@ class BaseModel:
                 elif i == "updated_at":
                     self.updated_at = kwargs[i]
                 else:
-                    setattr(self, i, kwargs[i])
+                    setattr(self, i, kwargs[i]) """
+        if kwargs:
+            for key in kwargs:
+                if key == "__class__":
+                    pass
+                elif key == "id":
+                    self.id = kwargs[key]
+                elif key == "created_at":
+                    self.created_at = datetime.strptime(kwargs[key], "\
+%Y-%m-%dT%H:%M:%S.%f")
+                elif key == "updated_at":
+                    self.updated_at = datetime.strptime(kwargs[key], "\
+%Y-%m-%dT%H:%M:%S.%f")
+                else:
+                    setattr(self, key, kwargs[key])
             models.storage.new(self)
 
     def __str__(self):
