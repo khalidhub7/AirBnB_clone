@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
-file_storage that manages
-our storage
+file_storage that manages storage
 """
 
 import json
