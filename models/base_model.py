@@ -1,78 +1,68 @@
 #!/usr/bin/python3
 """
-base model of our airBnB
+base model parent of other classes
 """
 
 from datetime import datetime
+import uuid
+from models.engine import file_storage
 import models
-from uuid import uuid4
 
 
 class BaseModel:
     """
-    Define BaseModel class
+    Define
+            BaseModel class
     """
 
     def __init__(self, *args, **kwargs):
         """
-        Initializes the `BaseModel` object.
-
+        Initialize the `BaseModel` object
         Args:
-            *args: Additional positional arguments (if any).
-            **kwargs: Additional keyword arguments (if any).
+            *args: Additional args
+            **kwargs: Additional keyword args
 
         Attributes:
-            id (str): The unique identifier of the object.
-            created_at (datetime): time when has been created
-            updated_at (datetime): time when has been updated
+            id: unique id
+            created_at: datetime when an instance is created
+            updated_at: datetime when an instance is updated
         """
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
         if kwargs:
-            for key in kwargs:
-                if key == "__class__":
+            for i in kwargs:
+                if i == "__class__":
                     pass
-                elif key == "id":
-                    self.id = kwargs[key]
-                elif key == "created_at":
-                    self.created_at = datetime.strptime(kwargs[key], "\
-%Y-%m-%dT%H:%M:%S.%f")
-                elif key == "updated_at":
-                    self.updated_at = datetime.strptime(kwargs[key], "\
-%Y-%m-%dT%H:%M:%S.%f")
+                elif i == "id":
+                    self.id = kwargs[i]
+                elif i == "created_at":
+                    self.created_at = kwargs[i]
+                elif i == "updated_at":
+                    self.updated_at = kwargs[i]
                 else:
-                    setattr(self, key, kwargs[key])
-        else:
-            self.id = str(uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+                    setattr(self, i, kwargs[i])
             models.storage.new(self)
 
     def __str__(self):
         """
-        string method that return descriptor of the object
-        Return:
-            object descriptor
+        object descriptor
         """
-        return ("[{}] ({}) {}\
-".format(self.__class__.__name__, self.id, self.__dict__))
+        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         """
-        save method that save time update and update
-        the updated_at instance attribute
+        updates the public instance attribute updated_at
         """
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
         """
-        to_dict method that get an prepared dict
-        Return:
-            new dictionary
+        returns a dictionary containing all keys/values of __dict__ of the instance
         """
-        dictionary = {}
-        for key in self.__dict__:
-            dictionary[key] = self.__dict__[key]
-        dictionary["__class__"] = self.__class__.__name__
-        dictionary["created_at"] = self.created_at.isoformat()
-        dictionary["updated_at"] = self.updated_at.isoformat()
-        return dictionary
+        mydict = self.__dict__.copy()
+        mydict['__class__'] = self.__class__.__name__
+        mydict['created_at'] = datetime.now().isoformat()
+        mydict['updated_at'] = datetime.now().isoformat()
+        return mydict
