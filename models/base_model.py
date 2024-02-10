@@ -16,6 +16,9 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """
         Initialize the `BaseModel` object
+        Args:
+            *args: Additional args
+            **kwargs: Additional keyword args
 
         Attributes:
             id: unique id
