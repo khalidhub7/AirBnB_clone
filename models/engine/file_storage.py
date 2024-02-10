@@ -23,7 +23,7 @@ class FileStorage:
         """
         get objects of the class
         """
-        return self.__objects.to_dict()
+        return FileStorage.__objects
 
     def new(self, obj):
         """
