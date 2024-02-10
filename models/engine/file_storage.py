@@ -4,7 +4,6 @@ file_storage that manages storage
 """
 
 import json
-import os
 from models.base_model import BaseModel
 
 
