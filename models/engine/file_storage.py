@@ -42,9 +42,11 @@ class FileStorage:
             file.write(json.dumps(dictionary))
 
     def reload(self):
-        """
-        load objects from json file
-        """
-        if os.path.exists(self.__file_path):
-            with open(self.__file_path, 'r') as file:
-                self.__objects = json.load(file)
+        """ load objects from json file """
+        try:
+            with open(FileStorage.__file_path, "r") as file:
+                dictionary = json.loads(file.read())
+            for key in dictionary:
+                self.new(eval(dictionary[key]["__class__"])(**dictionary[key]))
+        except IOError:
+            pass
