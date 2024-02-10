@@ -29,8 +29,7 @@ class FileStorage:
         """
         Add new object to objects dictionary
         """
-        key = "{}.id".format(obj.__class__.__name__) # ymkn ndir assign l id b self.id
-        self.__objects[key] = obj
+        FileStorage.__objects["{}.{}".format(obj.to_dict()['__class__'], obj.id)] = obj
 
     def save(self):
         """
