@@ -29,18 +29,7 @@ class BaseModel:
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
-        """ if kwargs:
-            for i in kwargs:
-                if i == "__class__":
-                    pass
-                elif i == "id":
-                    self.id = kwargs[i]
-                elif i == "created_at":
-                    self.created_at = kwargs[i]
-                elif i == "updated_at":
-                    self.updated_at = kwargs[i]
-                else:
-                    setattr(self, i, kwargs[i]) """
+
         if kwargs:
             for key in kwargs:
                 if key == "__class__":
@@ -76,10 +65,14 @@ class BaseModel:
 
     def to_dict(self):
         """
-        returns a dictionary containing all keys/values of __dict__ of the instance
+        to_dict method that get an prepared dict
+        Return:
+            new dictionary
         """
-        mydict = self.__dict__.copy()
-        mydict['__class__'] = self.__class__.__name__
-        mydict['created_at'] = datetime.now().isoformat()
-        mydict['updated_at'] = datetime.now().isoformat()
-        return mydict
+        dictionary = {}
+        for key in self.__dict__:
+            dictionary[key] = self.__dict__[key]
+        dictionary["__class__"] = self.__class__.__name__
+        dictionary["created_at"] = self.created_at.isoformat()
+        dictionary["updated_at"] = self.updated_at.isoformat()
+        return dictionary
