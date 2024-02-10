@@ -5,6 +5,7 @@ base model parent of other classes
 
 from datetime import datetime
 import uuid
+import models
 
 
 class BaseModel:
