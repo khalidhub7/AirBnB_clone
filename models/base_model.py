@@ -5,6 +5,7 @@ base model parent of other classes
 
 from datetime import datetime
 import uuid
+from models.engine import file_storage
 
 
 class BaseModel:
