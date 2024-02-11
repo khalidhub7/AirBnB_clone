@@ -138,23 +138,21 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def default(self, line):
-        """
+        '''
         default commands
-        """
+        '''
         if line.endswith(".all()"):
-            """
-            Check if the command matches
-            <class_name>.all()
-            """
+            '''
+            Check if command matches <class_name>.all()
+            '''
             if line[:-6] != "":
                 self.do_all(line[:-6])
         elif line.endswith(".count()"):
-            """
-            Check if the command matches
-            <class_name>.count()
-            """
+            '''
+            Check if command matches <class_name>.count()
+            '''
             if line[:-8] != "":
-                if line[:-8] in HBNBCommand.classes_list:
+                if line[:-8] in HBNBCommand.list_classess:
                     num_obj = 0
                     for key in storage.all():
                         if line[:-8] in key:
@@ -164,19 +162,17 @@ class HBNBCommand(cmd.Cmd):
                     print("** class doesn't exist **")
 
         elif ".show(" in line and line.endswith(")"):
-            """
-            Check if the command matches
-            <class_name>.show(<id>)
-            """
+            '''
+            Check if command matches <class_name>.show(<id>)
+            '''
             className = line.split(".")[0]
             id = line.split("(")[1][:-1]
             self.do_show(className+" "+id)
 
         elif ".destroy(" in line and line.endswith(")"):
-            """
-            Check if the command matches
-            <class_name>.destroy(<id>)
-            """
+            '''
+            Check if command matches <class_name>.destroy(<id>)
+            '''
             className = line.split(".")[0]
             id = line.split("(")[1][:-1]
             self.do_destroy(className+" "+id)
@@ -194,8 +190,8 @@ class HBNBCommand(cmd.Cmd):
 "+attr+" "+"\""+str(dictionary[attr])+"\"")
             else:
                 string = className
-                for elm in args.split(", "):
-                    string += " "+elm
+                for elem in args.split(", "):
+                    string += " "+elem
                 self.do_update(string)
         else:
             print("*** Unknown syntax: "+line)
