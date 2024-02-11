@@ -16,15 +16,13 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """
-        Initialize the `BaseModel` object
-        Args:
-            *args: Additional args
-            **kwargs: Additional keyword args
+        initialize BaseModel obj
+        *args: args if exist
+        **kwargs: keyword args if exist
 
-        Attributes:
-            id: unique id
-            created_at: datetime when an instance is created
-            updated_at: datetime when an instance is updated
+        id: unique id
+        created_at: datetime when an instance is created
+        updated_at: datetime when an instance is updated
         """
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
@@ -44,35 +42,29 @@ class BaseModel:
 %Y-%m-%dT%H:%M:%S.%f")
                 else:
                     setattr(self, key, kwargs[key])
-        else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
             models.storage.new(self)
 
     def __str__(self):
         """
-        object descriptor
+        obj descriptor
         """
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         """
-        updates the public instance attribute updated_at
+        update the updated_at
         """
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        """
-        to_dict method that get an prepared dict
-        Return:
-            new dictionary
-        """
-        dictionary = {}
+        '''
+        get a prepared dict
+        '''
+        my_dict = {}
         for key in self.__dict__:
-            dictionary[key] = self.__dict__[key]
-        dictionary["__class__"] = self.__class__.__name__
-        dictionary["created_at"] = self.created_at.isoformat()
-        dictionary["updated_at"] = self.updated_at.isoformat()
-        return dictionary
+            my_dict[key] = self.__dict__[key]
+        my_dict["__class__"] = self.__class__.__name__
+        my_dict["created_at"] = self.created_at.isoformat()
+        my_dict["updated_at"] = self.updated_at.isoformat()
+        return my_dict
