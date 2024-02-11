@@ -18,7 +18,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, arg):
         """command that create new instance"""
         name_of_class = arg.split()
-        if len(name_of_class) == 0:
+        if len(name_of_class[0]) == 0:
             print("** class name missing **")
         elif name_of_class[0] not in HBNBCommand.list_classess:
             print("** class doesn't exist **")
