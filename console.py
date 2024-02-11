@@ -65,5 +65,22 @@ class HBNBCommand(cmd.Cmd):
 ".format(my_args[0], my_args[1])]
             models.storage.save()
 
+    def do_all(self, arg):
+        '''command prints all objs representation'''
+        if arg == "":
+            list = []
+            for key in models.storage.all():
+                list.append(str(models.storage.all()[key]))
+            print(list)
+        else:
+            if arg.split()[0] in HBNBCommand.list_classess:
+                list = []
+                for key in models.storage.all():
+                    if arg.split()[0] in key:
+                        list.append(str(models.storage.all()[key]))
+                print(list)
+            else:
+                print("** class doesn't exist **")
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
