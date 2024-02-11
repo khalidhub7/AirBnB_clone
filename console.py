@@ -27,9 +27,8 @@ class HBNBCommand(cmd.Cmd):
         elif name_of_class not in HBNBCommand.list_classess:
             print("** class doesn't exist **")
         else:
-            new = name_of_class
             models.storage.save()
-            print(new.id)
+            print(name_of_class.id)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
