@@ -33,27 +33,27 @@ class HBNBCommand(cmd.Cmd):
             print(name_of_class.id)
 
     def do_show(self, arg):
-        """show command to prints object representation"""
-        args_list = shlex.split(arg)
-        if self.check_id(arg):
+        '''show obj representation'''
+        my_args = arg.split()
+        if self.check_id_exist(arg):
             print(models.storage.all()["{}.{}\
-".format(args_list[0], args_list[1])])
-
-    def check_id(self, arg):
+".format(my_args[0], my_args[1])])
+    
+    def check_id_exist(self, arg):
         """
-        check if class name and id exist
+        check if class && id exist
         """
-        args_list = shlex.split(arg)
-        if len(args_list) == 0:
+        my_args = arg.split()
+        if len(my_args) == 0:
             print("** class name missing **")
             return False
-        if args_list[0] not in HBNBCommand.classes_list:
+        if my_args[0] not in HBNBCommand.list_classess:
             print("** class doesn't exist **")
             return False
-        if len(args_list) < 2:
+        if len(my_args) < 2:
             print("** instance id missing **")
             return False
-        if args_list[0]+"."+args_list[1] in storage.all():
+        if my_args[0] + "." + my_args[1] in models.storage.all():
             return True
         print("** no instance found **")
 
