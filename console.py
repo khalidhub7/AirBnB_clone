@@ -2,6 +2,8 @@
 '''AIRBNB console'''
 
 import cmd
+import models
+import shlex
 
 
 class HBNBCommand(cmd.Cmd):
