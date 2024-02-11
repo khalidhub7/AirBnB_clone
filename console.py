@@ -1,114 +1,111 @@
 #!/usr/bin/python3
-"""
-Module of AIRBNB console
-"""
-
-import cmd
-from models.base_model import BaseModel
+'''
+airbnb console
+'''
 from models.engine.file_storage import FileStorage
 from models import storage
 import shlex
+import cmd
+from models.base_model import BaseModel
 import sys
 import json
 
 
 class HBNBCommand(cmd.Cmd):
-    """
-    define HBNBCommand class
-
-    Classe Attributes:
-        prompt (str): The prompt.
-        classes_list (list): A list of all used class names.
-    """
+    '''
+    define HBNBCommand
+    prompt: prompt
+    list_classess: all class used names
+    '''
 
     prompt = "(hbnb) "
-    classes_list = ["BaseModel", "User", "State", "City\
-", "Amenity", "Place", "Review"]
+    list_classess = ["BaseModel", "User", "State", "City", "Amenity\
+", "Place", "Review"]
 
     def do_create(self, arg):
-        """create command to creates a new instance\n"""
-        className = arg.split()
-        if len(className) == 0:
+        '''
+        create command to creates a new instance
+        '''
+        nameof_class = arg.split()
+        if len(nameof_class) == 0:
             print("** class name missing **")
-        elif className[0] not in HBNBCommand.classes_list:
+        elif nameof_class[0] not in HBNBCommand.list_classess:
             print("** class doesn't exist **")
         else:
-            new_obj = eval(className[0])()
+            new = eval(nameof_class[0])()
             storage.save()
-            print(new_obj.id)
+            print(new.id)
 
-    def check_id(self, arg):
-        """
-        check if class name and id exist
-        """
-        args_list = shlex.split(arg)
-        if len(args_list) == 0:
+    def check_id_exist(self, arg):
+        '''
+        check if class && id exist
+        '''
+        myargs = shlex.split(arg)
+        if len(myargs) == 0:
             print("** class name missing **")
             return False
-        if args_list[0] not in HBNBCommand.classes_list:
+        if myargs[0] not in HBNBCommand.list_classess:
             print("** class doesn't exist **")
             return False
-        if len(args_list) < 2:
+        if len(myargs) < 2:
             print("** instance id missing **")
             return False
-        if args_list[0]+"."+args_list[1] in storage.all():
+        if myargs[0]+"."+myargs[1] in storage.all():
             return True
         print("** no instance found **")
 
-    def check_attr(self, arg):
-        """
-        check if attribute name exist
-        """
-        args_list = shlex.split(arg)
-        if len(args_list) < 3:
+    def check_attr_exist(self, arg):
+        '''
+        check if attribute exist
+        '''
+        myargs = shlex.split(arg)
+        if len(myargs) < 3:
             print("** attribute name missing **")
             return False
-        if len(args_list) < 4:
+        if len(myargs) < 4:
             print("** value missing **")
             return False
         return True
 
     def do_show(self, arg):
-        """show command to prints object representation"""
-        args_list = shlex.split(arg)
-        if self.check_id(arg):
+        '''show command to prints object representation'''
+        myargs = shlex.split(arg)
+        if self.check_id_exist(arg):
             print(storage.all()["{}.{}\
-".format(args_list[0], args_list[1])])
+".format(myargs[0], myargs[1])])
 
     def do_destroy(self, arg):
-        """destroy command that destroy object"""
-        args_list = shlex.split(arg)
-        if self.check_id(arg):
+        '''destroy command that destroy object'''
+        myargs = shlex.split(arg)
+        if self.check_id_exist(arg):
             del storage.all()["{}.{}\
-".format(args_list[0], args_list[1])]
+".format(myargs[0], myargs[1])]
             storage.save()
 
     def do_all(self, arg):
-        """all command thar prints all objects representation"""
-        # TODO: all BaseModel dgf
+        '''print all objects representation'''
         if arg == "":
-            list_str = []
+            list_string = []
             for key in storage.all():
-                list_str.append(str(storage.all()[key]))
-            print(list_str)
+                list_string.append(str(storage.all()[key]))
+            print(list_string)
         else:
-            if arg.split()[0] in HBNBCommand.classes_list:
-                list_str = []
+            if arg.split()[0] in HBNBCommand.list_classess:
+                list_string = []
                 for key in storage.all():
                     if arg.split()[0] in key:
-                        list_str.append(str(storage.all()[key]))
-                print(list_str)
+                        list_string.append(str(storage.all()[key]))
+                print(list_string)
             else:
                 print("** class doesn't exist **")
 
     def do_update(self, arg):
-        """update command that update an object"""
-        if self.check_id(arg):
-            if self.check_attr(arg):
+        '''update command that update an object'''
+        if self.check_id_exist(arg):
+            if self.check_attr_exist(arg):
                 args_list = shlex.split(arg)
                 obj = storage.all()[f"{args_list[0]}.{args_list[1]}"]
                 if hasattr(obj, args_list[2]):
-                    # TODO: handle casting error by using try except
                     try:
                         value = type(getattr(obj, args_list[2]))(args_list[3])
                         setattr(obj, args_list[2], value)
@@ -127,15 +124,17 @@ class HBNBCommand(cmd.Cmd):
                 obj.save()
 
     def do_quit(self, line):
-        """Quit command to exit the program\n"""
+        '''
+        Quit command to exit the program
+        '''
         return True
 
     def do_EOF(self, line):
-        """C-d command to exit the program\n"""
+        '''C-d command to exit the program'''
         return True
 
     def emptyline(self):
-        """an empty line handling"""
+        '''an empty line handling'''
         pass
 
     def default(self, line):
