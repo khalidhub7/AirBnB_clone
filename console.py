@@ -57,5 +57,13 @@ class HBNBCommand(cmd.Cmd):
             return True
         print("** no instance found **")
 
+    def do_destroy(self, arg):
+        '''command that destroy obj'''
+        my_args = arg.split()
+        if self.check_id(arg):
+            del models.storage.all()["{}.{}\
+".format(my_args[0], my_args[1])]
+            models.storage.save()
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
