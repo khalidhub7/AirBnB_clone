@@ -9,6 +9,7 @@ import cmd
 from models.base_model import BaseModel
 import sys
 import json
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
