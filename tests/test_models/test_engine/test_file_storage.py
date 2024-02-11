@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''file_storage tests'''
+''' tests '''
 import unittest
 from unittest.mock import mock_open, patch
 import json
