@@ -18,10 +18,10 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, arg):
         '''command that create new instance'''
         name_of_class = arg.split()
-        if name_of_class not in HBNBCommand.list_classess:
-            print("** class doesn't exist **")
-        elif len(name_of_class) == 0:
+        if len(name_of_class) == 0:
             print("** class name missing **")
+        elif name_of_class not in HBNBCommand.list_classess:
+            print("** class doesn't exist **")
         else:
             new = eval(name_of_class[0])()
             models.storage.save()
