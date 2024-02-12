@@ -14,7 +14,7 @@ class BaseModel:
         self.updated_at = datetime.datetime.now()
         self.id = str(uuid.uuid4())
 
-        if kwargs != None:
+        """ if kwargs != None:
             formatt = '%Y-%m-%dT%H:%M:%S.%f'
             for k, v in kwargs.items():
                 if k == '__class__':
@@ -27,9 +27,19 @@ class BaseModel:
                     self.__dict__[k] = v
         else:
             #self.__dict__ = self.__dict__
+            models.storage.new(self) """
+
+        tform = "%Y-%m-%dT%H:%M:%S.%f"
+        if len(kwargs) != 0:
+            for k, v in kwargs.items():
+                if k == "created_at" or k == "updated_at":
+                    self.__dict__[k] = datetime.strptime(v, tform)
+                else:
+                    self.__dict__[k] = v
+        else:
             models.storage.new(self)
 
-    """ def __str__(self):
+    def __str__(self):
         '''comment 4 test'''
         return "[{}] ({}) {}"\
         .format(self.__class__.__name__, self.id, self.__dict__)
@@ -37,16 +47,6 @@ class BaseModel:
     def save(self):
         '''comment 4 test'''
         self.updated_at = datetime.datetime.now()
-        models.storage.save() """
-    
-    def __str__(self):
-        """Return the print/str representation of the BaseModel instance."""
-        clname = self.__class__.__name__
-        return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
-    
-    def save(self):
-        """Update updated_at with the current datetime."""
-        self.updated_at = datetime.datetime.today()
         models.storage.save()
     
     def to_dict(self):
