@@ -15,28 +15,29 @@ import os
 
 
 class FileStorage:
-    '''
+    """
     define a class
-    __file_path: storage path
-    __objects: dict of obj created
-    '''
-
-    __file_path = "file.json"
+    """
+    __file_path = 'file.json'
     __objects = {}
 
     def all(self):
-        '''get objs of class'''
+        """
+        return class objects
+        """
         return FileStorage.__objects
 
     def new(self, obj):
-        '''
-        add new obj to objs dict
-        '''
+        """
+        Add new obj to objects dictionary
+        """
         keyy = "{}.{}".format(obj.__class__.__name__, obj.id)
         FileStorage.__objects[keyy] = obj
 
     def save(self):
-        '''save objs to json file'''
+        """
+        Save objects to json__file
+        """
         to__json = {}
         for i in FileStorage.__objects:
             to__json[i] = FileStorage.__objects[i].to_dict()
@@ -45,10 +46,12 @@ class FileStorage:
             myfile.write(json.dumps(to__json))
 
     def reload(self):
-        '''load objs from json file'''
+        """
+        load objects from json__file
+        """
         if os.path.exists(FileStorage.__file_path):
-            with open(FileStorage.__file_path, 'r', encoding='UTF-8') as file:
-                data = json.load(file)
-                for key, value in data.items():
+            with open(FileStorage.__file_path, 'r', encoding='UTF-8') as myfile:
+                mydata = json.load(myfile)
+                for key, value in mydata.items():
                     obj = BaseModel(**value)
                     FileStorage.__objects[key] = obj
