@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''comment 4 test'''
+'''BaseModel parent of other classes'''
 
 import datetime
 import uuid
@@ -7,9 +7,9 @@ import models
 
 
 class BaseModel:
-    '''comment 4 test'''
+    '''BaseModel class'''
     def __init__(self, *args, **kwargs):
-        '''comment 4 test'''
+        '''BaseModel initialization'''
         self.created_at = datetime.datetime.now()
         self.updated_at = datetime.datetime.now()
         self.id = str(uuid.uuid4())
@@ -30,17 +30,17 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
-        '''comment 4 test'''
+        '''str representation'''
         return "[{}] ({}) {}"\
         .format(self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
-        '''comment 4 test'''
+        '''updated_at instance attribute'''
         self.updated_at = datetime.datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        '''comment 4 test'''
+        '''to_dict method'''
         new__dict = self.__dict__.copy()
         new__dict['__class__'] = self.__class__.__name__
         new__dict['created_at'] = self.created_at.isoformat()
