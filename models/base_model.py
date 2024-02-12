@@ -10,6 +10,7 @@ class BaseModel:
     '''comment 4 test'''
     def __init__(self, *args, **kwargs):
         '''comment 4 test'''
+        tform = "%Y-%m-%dT%H:%M:%S.%f"
         self.created_at = datetime.datetime.now()
         self.updated_at = datetime.datetime.now()
         self.id = str(uuid.uuid4())
@@ -29,7 +30,6 @@ class BaseModel:
             #self.__dict__ = self.__dict__
             models.storage.new(self) """
 
-        tform = "%Y-%m-%dT%H:%M:%S.%f"
         if len(kwargs) != 0:
             for k, v in kwargs.items():
                 if k == "created_at" or k == "updated_at":
