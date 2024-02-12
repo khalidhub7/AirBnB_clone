@@ -36,7 +36,6 @@ class FileStorage:
 
     def save(self):
         '''save objs to json file'''
-        def save(self):
         with open(FileStorage.__file_path, "w", encoding='UTF-8') as myfile:
             json.dump(FileStorage.__objects, myfile)
 
