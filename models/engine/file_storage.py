@@ -36,6 +36,7 @@ class FileStorage:
 
     def save(self):
         '''save objs to json file'''
+        def save(self):
         to__json = {}
         for i in FileStorage.__objects:
             to__json[i] = FileStorage.__objects[i].to_dict()
