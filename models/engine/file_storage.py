@@ -31,7 +31,8 @@ class FileStorage:
         '''
         add new obj to objs dict
         '''
-        key = f"{obj.__class__.__name__}.{obj.id}"
+        #key = f"{obj.__class__.__name__}.{obj.id}"
+        key = "{}.id".format(obj.__class__.__name__)
         FileStorage.__objects[key] = obj
 
     def save(self):
