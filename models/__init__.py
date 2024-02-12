@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""make my directory an module"""
+"""
+make directory an module
+"""
 from models.engine import file_storage
 
 
