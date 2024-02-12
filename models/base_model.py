@@ -42,9 +42,8 @@ class BaseModel:
     def to_dict(self):
         '''comment 4 test'''
         new__dict = self.__dict__.copy()
-        time__now = datetime.datetime.now().isoformat()
         new__dict['__class__'] = self.__class__.__name__
-        new__dict['created_at'] = time__now
-        new__dict['updated_at'] = time__now
-        #new__dict['id'] = self.id
+        new__dict['created_at'] = self.created_at.isoformat()
+        new__dict['updated_at'] = self.updated_at.isoformat()
+        new__dict['id'] = self.id
         return new__dict
