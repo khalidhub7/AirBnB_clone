@@ -26,10 +26,10 @@ class BaseModel:
                 else:
                     self.__dict__[k] = v
         else:
-            self.__dict__ = self.__dict__
+            #self.__dict__ = self.__dict__
             models.storage.new(self)
 
-    def __str__(self):
+    """ def __str__(self):
         '''comment 4 test'''
         return "[{}] ({}) {}"\
         .format(self.__class__.__name__, self.id, self.__dict__)
@@ -37,6 +37,16 @@ class BaseModel:
     def save(self):
         '''comment 4 test'''
         self.updated_at = datetime.datetime.now()
+        models.storage.save() """
+    
+    def __str__(self):
+        """Return the print/str representation of the BaseModel instance."""
+        clname = self.__class__.__name__
+        return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
+    
+    def save(self):
+        """Update updated_at with the current datetime."""
+        self.updated_at = datetime.today()
         models.storage.save()
     
     def to_dict(self):
