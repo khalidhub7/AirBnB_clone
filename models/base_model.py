@@ -39,7 +39,7 @@ class BaseModel:
         self.updated_at = datetime.datetime.now()
         models.storage.save()
     
-    """ def to_dict(self):
+    def to_dict(self):
         '''comment 4 test'''
         new__dict = self.__dict__.copy()
         time__now = datetime.datetime.now().isoformat()
@@ -47,16 +47,4 @@ class BaseModel:
         new__dict['created_at'] = time__now
         new__dict['updated_at'] = time__now
         new__dict['id'] = self.id
-        return new__dict """
-    
-    def to_dict(self):
-        """Return the dictionary of the BaseModel instance.
-
-        Includes the key/value pair __class__ representing
-        the class name of the object.
-        """
-        rdict = self.__dict__.copy()
-        rdict["created_at"] = self.created_at.isoformat()
-        rdict["updated_at"] = self.updated_at.isoformat()
-        rdict["__class__"] = self.__class__.__name__
-        return rdict
+        return new__dict
