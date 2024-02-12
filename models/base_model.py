@@ -46,5 +46,5 @@ class BaseModel:
         new__dict['__class__'] = self.__class__.__name__
         new__dict['created_at'] = time__now
         new__dict['updated_at'] = time__now
-        new__dict['id'] = self.id
+        #new__dict['id'] = self.id
         return new__dict
