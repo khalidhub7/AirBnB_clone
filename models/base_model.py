@@ -17,11 +17,11 @@ class BaseModel:
         if kwargs != None:
             formatt = '%Y-%m-%dT%H:%M:%S.%f'
             for k, v in kwargs.items():
-                if k == '__class__':
-                    pass
+                """ if k == '__class__':
+                    pass """
                 if k == 'created_at':
                     self.__dict__[k] = datetime.datetime.strptime(v, formatt)
-                if k == 'updated_at':
+                elif k == 'updated_at':
                     self.__dict__[k] = datetime.datetime.strptime(v, formatt)
                 else:
                     self.__dict__[k] = v
