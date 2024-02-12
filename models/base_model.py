@@ -10,7 +10,6 @@ class BaseModel:
     '''comment 4 test'''
     def __init__(self, *args, **kwargs):
         '''comment 4 test'''
-        tform = "%Y-%m-%dT%H:%M:%S.%f"
         self.created_at = datetime.datetime.now()
         self.updated_at = datetime.datetime.now()
         self.id = str(uuid.uuid4())
@@ -18,8 +17,8 @@ class BaseModel:
         if kwargs != None:
             formatt = '%Y-%m-%dT%H:%M:%S.%f'
             for k, v in kwargs.items():
-                """ if k == '__class__':
-                    pass """
+                if k == '__class__':
+                    pass
                 if k == 'created_at':
                     self.__dict__[k] = datetime.datetime.strptime(v, formatt)
                 if k == 'updated_at':
