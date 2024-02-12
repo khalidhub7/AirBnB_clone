@@ -1,6 +1,7 @@
 #!/usr/bin/python3
+
 """
-file_storage manage storage
+File storage for managing storage.
 """
 
 import json
@@ -15,21 +16,26 @@ from models.review import Review
 
 class FileStorage:
     '''
-    define a class
-    __file_path: storage path
-    __objects: dict of obj created
+    Define a class for file storage.
+
+    Attributes:
+        __file_path (str): Path to the storage file.
+        __objects (dict): Dictionary of created objects.
     '''
 
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
-        '''get objs of class'''
+        '''Get all objects of a class.'''
         return FileStorage.__objects
 
     def new(self, obj):
         '''
-        add new obj to objs dict
+        Add a new object to the objects dictionary.
+
+        Args:
+            obj: Object to be added.
         '''
         class_name = obj.__class__.__name__
         obj_id = obj.id
@@ -37,7 +43,7 @@ class FileStorage:
         FileStorage.__objects[key] = obj
 
     def save(self):
-        '''save objs to json file'''
+        '''Save objects to a JSON file.'''
         dictionary = {}
         for key in FileStorage.__objects:
             dictionary[key] = FileStorage.__objects[key].to_dict()
@@ -45,7 +51,7 @@ class FileStorage:
             file.write(json.dumps(dictionary))
 
     def reload(self):
-        '''load objs from json file'''
+        '''Load objects from a JSON file.'''
         try:
             with open(FileStorage.__file_path, "r") as file:
                 dictionary = json.loads(file.read())
