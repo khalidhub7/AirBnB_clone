@@ -26,7 +26,7 @@ class BaseModel:
                 else:
                     self.__dict__[k] = v
         else:
-            self.__dict__ = self.__dict__
+            #self.__dict__ = self.__dict__
             models.storage.new(self)
 
     def __str__(self):
