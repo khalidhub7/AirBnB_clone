@@ -38,7 +38,7 @@ class FileStorage:
         '''save objs to json file'''
         to__json = {}
         for i in FileStorage.__objects:
-            to__json[i] = FileStorage.__objects[i]
+            to__json[i] = FileStorage.__objects[i].to_dict()
         with open(FileStorage.__file_path, "w", encoding='UTF-8') as myfile:
             myfile.write(json.dumps(to__json))
 
