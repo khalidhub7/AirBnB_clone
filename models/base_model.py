@@ -45,5 +45,5 @@ class BaseModel:
         new__dict['__class__'] = self.__class__.__name__
         new__dict['created_at'] = self.created_at.isoformat()
         new__dict['updated_at'] = self.updated_at.isoformat()
-        new__dict['id'] = self.id
+        #new__dict['id'] = self.id
         return new__dict
