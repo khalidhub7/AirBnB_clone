@@ -39,6 +39,7 @@ class FileStorage:
         to__json = {}
         for i in FileStorage.__objects:
             to__json[i] = FileStorage.__objects[i].to_dict()
+            '''drna call l to_dict() method to convert it to a dictionary'''
         with open(FileStorage.__file_path, "w", encoding='UTF-8') as myfile:
             myfile.write(json.dumps(to__json))
 
