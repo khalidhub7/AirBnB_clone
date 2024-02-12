@@ -11,6 +11,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+import os
 
 
 class FileStorage:
@@ -45,10 +46,9 @@ class FileStorage:
 
     def reload(self):
         '''load objs from json file'''
-        try:
-            with open(FileStorage.__file_path, "r") as file:
-                dictionary = json.loads(file.read())
-            for key in dictionary:
-                self.new(eval(dictionary[key]["__class__"])(**dictionary[key]))
-        except IOError:
-            pass
+        if os.path.exists(FileStorage.__file_path):
+            with open(FileStorage.__file_path, 'r', encoding='UTF-8') as file:
+                data = json.load(file)
+                for key, value in data.items():
+                    obj = BaseModel(**value)
+                    FileStorage.__objects[key] = obj
