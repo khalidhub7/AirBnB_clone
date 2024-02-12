@@ -1,74 +1,50 @@
 #!/usr/bin/python3
-"""
-base model parent of other classes
-"""
+'''comment 4 test'''
 
-from datetime import datetime
+import datetime
 import uuid
 import models
 
 
 class BaseModel:
-    """
-    Define
-            BaseModel class
-    """
-
+    '''comment 4 test'''
     def __init__(self, *args, **kwargs):
-        """
-        initialize BaseModel obj
-        *args: args if exist
-        **kwargs: keyword args if exist
-
-        id: unique id
-        created_at: datetime when an instance is created
-        updated_at: datetime when an instance is updated
-        """
+        '''comment 4 test'''
+        self.created_at = datetime.datetime.now()
+        self.updated_at = datetime.datetime.now()
         self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
 
-        if kwargs:
-            for key in kwargs:
-                if key == "__class__":
+        if kwargs != None:
+            formatt = '%Y-%m-%dT%H:%M:%S.%f'
+            for k, v in kwargs.items():
+                if k == '__class__':
                     pass
-                elif key == "id":
-                    self.id = kwargs[key]
-                elif key == "created_at":
-                    self.created_at = datetime.strptime(kwargs[key], "\
-%Y-%m-%dT%H:%M:%S.%f")
-                elif key == "updated_at":
-                    self.updated_at = datetime.strptime(kwargs[key], "\
-%Y-%m-%dT%H:%M:%S.%f")
+                elif k == 'created_at':
+                    self.__dict__[k] = datetime.datetime.strptime(v, formatt)
+                elif k == 'updated_at':
+                    self.__dict__[k] = datetime.datetime.strptime(v, formatt)
                 else:
-                    setattr(self, key, kwargs[key])
+                    self.__dict__[k] = v
         else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            self.__dict__ = self.__dict__
             models.storage.new(self)
 
     def __str__(self):
-        """
-        obj descriptor
-        """
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
-
+        '''comment 4 test'''
+        return "[{}] ({}) {}"\
+        .format(self.__class__.__name__, self.id, self.__dict__)
+    
     def save(self):
-        """
-        update the updated_at
-        """
-        self.updated_at = datetime.now()
+        '''comment 4 test'''
+        self.updated_at = datetime.datetime.now()
         models.storage.save()
-
+    
     def to_dict(self):
-        '''
-        get a prepared dict
-        '''
-        my_dict = {}
-        for key in self.__dict__:
-            my_dict[key] = self.__dict__[key]
-        my_dict["__class__"] = self.__class__.__name__
-        my_dict["created_at"] = self.created_at.isoformat()
-        my_dict["updated_at"] = self.updated_at.isoformat()
-        return my_dict
+        '''comment 4 test'''
+        new__dict = self.__dict__.copy()
+        time__now = datetime.datetime.now().isoformat()
+        new__dict['__class__'] = self.__class__.__name__
+        new__dict['created_at'] = time__now
+        new__dict['updated_at'] = time__now
+        new__dict['id'] = self.id
+        return new__dict
