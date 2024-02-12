@@ -3,7 +3,7 @@
 
 import datetime
 import uuid
-from models import storage
+import models
 
 
 class BaseModel:
@@ -27,7 +27,7 @@ class BaseModel:
                     self.__dict__[k] = v
         else:
             self.__dict__ = self.__dict__
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         '''comment 4 test'''
@@ -37,7 +37,7 @@ class BaseModel:
     def save(self):
         '''comment 4 test'''
         self.updated_at = datetime.datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         '''comment 4 test'''
