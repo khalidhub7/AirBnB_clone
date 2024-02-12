@@ -15,28 +15,19 @@ class BaseModel:
         self.updated_at = datetime.datetime.now()
         self.id = str(uuid.uuid4())
 
-        """ if kwargs != None:
+        if kwargs != None:
             formatt = '%Y-%m-%dT%H:%M:%S.%f'
             for k, v in kwargs.items():
-                if k == '__class__':
-                    pass
-                elif k == 'created_at':
+                """ if k == '__class__':
+                    pass """
+                if k == 'created_at':
                     self.__dict__[k] = datetime.datetime.strptime(v, formatt)
-                elif k == 'updated_at':
+                if k == 'updated_at':
                     self.__dict__[k] = datetime.datetime.strptime(v, formatt)
                 else:
                     self.__dict__[k] = v
         else:
-            #self.__dict__ = self.__dict__
-            models.storage.new(self) """
-
-        if len(kwargs) != 0:
-            for k, v in kwargs.items():
-                if k == "created_at" or k == "updated_at":
-                    self.__dict__[k] = datetime.strptime(v, tform)
-                else:
-                    self.__dict__[k] = v
-        else:
+            self.__dict__ = self.__dict__
             models.storage.new(self)
 
     def __str__(self):
