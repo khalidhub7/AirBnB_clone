@@ -1,49 +1,78 @@
 #!/usr/bin/python3
-'''comment 4 test'''
+"""
+base model of our airBnB
+"""
 
-import datetime
-import uuid
+from datetime import datetime
 import models
+from uuid import uuid4
 
 
 class BaseModel:
-    '''comment 4 test'''
-    def __init__(self, *args, **kwargs):
-        '''comment 4 test'''
-        self.created_at = datetime.datetime.now()
-        self.updated_at = datetime.datetime.now()
-        self.id = str(uuid.uuid4())
+    """
+    Define BaseModel class
+    """
 
-        if kwargs != None:
-            formatt = '%Y-%m-%dT%H:%M:%S.%f'
-            for k, v in kwargs.items():
-                """ if k == '__class__':
-                    pass """
-                if k == 'created_at':
-                    self.__dict__[k] = datetime.datetime.strptime(v, formatt)
-                elif k == 'updated_at':
-                    self.__dict__[k] = datetime.datetime.strptime(v, formatt)
+    def __init__(self, *args, **kwargs):
+        """
+        Initializes the `BaseModel` object.
+
+        Args:
+            *args: Additional positional arguments (if any).
+            **kwargs: Additional keyword arguments (if any).
+
+        Attributes:
+            id (str): The unique identifier of the object.
+            created_at (datetime): time when has been created
+            updated_at (datetime): time when has been updated
+        """
+        if kwargs:
+            for key in kwargs:
+                if key == "__class__":
+                    pass
+                elif key == "id":
+                    self.id = kwargs[key]
+                elif key == "created_at":
+                    self.created_at = datetime.strptime(kwargs[key], "\
+%Y-%m-%dT%H:%M:%S.%f")
+                elif key == "updated_at":
+                    self.updated_at = datetime.strptime(kwargs[key], "\
+%Y-%m-%dT%H:%M:%S.%f")
                 else:
-                    self.__dict__[k] = v
+                    setattr(self, key, kwargs[key])
         else:
-            self.__dict__ = self.__dict__
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
             models.storage.new(self)
 
     def __str__(self):
-        '''comment 4 test'''
-        return "[{}] ({}) {}"\
-        .format(self.__class__.__name__, self.id, self.__dict__)
+        """
+        string method that return descriptor of the object
+        Return:
+            object descriptor
+        """
+        return ("[{}] ({}) {}\
+".format(self.__class__.__name__, self.id, self.__dict__))
 
     def save(self):
-        '''comment 4 test'''
-        self.updated_at = datetime.datetime.now()
+        """
+        save method that save time update and update
+        the updated_at instance attribute
+        """
+        self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        '''comment 4 test'''
-        new__dict = self.__dict__.copy()
-        new__dict['__class__'] = self.__class__.__name__
-        new__dict['created_at'] = self.created_at.isoformat()
-        new__dict['updated_at'] = self.updated_at.isoformat()
-        new__dict['id'] = self.id
-        return new__dict
+        """
+        to_dict method that get an prepared dict
+        Return:
+            new dictionary
+        """
+        dictionary = {}
+        for key in self.__dict__:
+            dictionary[key] = self.__dict__[key]
+        dictionary["__class__"] = self.__class__.__name__
+        dictionary["created_at"] = self.created_at.isoformat()
+        dictionary["updated_at"] = self.updated_at.isoformat()
+        return dictionary
