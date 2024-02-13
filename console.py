@@ -11,8 +11,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb)  '
 
     def do_EOF(self):
-        '''
-        EOF command'''
+        '''EOF command'''
         return True
 
     def do_quit(self):
@@ -20,8 +19,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
-        '''
-        emptyline haldle'''
+        '''emptyline haldle'''
         pass
 
 if __name__ == '__main__':
