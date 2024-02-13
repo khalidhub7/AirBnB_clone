@@ -30,16 +30,16 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         '''
-        create command to creates a new instance
-        '''
-        nameof_class = arg.split()
-        if len(nameof_class) == 0:
-            print("** class name missing **")
-        elif nameof_class[0] not in HBNBCommand.list_classess:
-            print("** class doesn't exist **")
+        create a new instance'''
+        if not arg:
+            print('** class name missing **')
+            return
+        if not arg.__class__.__name__:
+            print('** class doesn\'t exist **')
+            return
         else:
-            new = eval(nameof_class[0])()
-            storage.save()
+            new = eval(arg)()
+            models.storage.save()
             print(new.id)
 
     def check_id_exist(self, arg):
