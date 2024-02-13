@@ -1,12 +1,10 @@
 #!/usr/bin/python3
-'''
-AirBnB_ console'''
+'''AirBnB_ console'''
 import cmd
 
 
 class HBNBCommand(cmd.Cmd):
-    '''
-    define HBNBCommand class'''
+    '''define HBNBCommand class'''
 
     prompt = '(hbnb)'
 
