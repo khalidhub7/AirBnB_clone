@@ -78,10 +78,8 @@ class HBNBCommand(cmd.Cmd):
         args = shlex.split(arg)
         if len(args) == 0:
             print('** class name missing **')
-            return
         elif args[0] not in HBNBCommand.list_classess:
             print('** class doesn\'t exist **')
-            return
         elif (args[0] + '.' + args[1]) in storage.all():
             print(storage.all()["{}.{}\
 ".format(args[0], args[1])])
