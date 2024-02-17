@@ -78,9 +78,9 @@ class HBNBCommand(cmd.Cmd):
         args = shlex.split(arg)
         if len(args) == 0:
             print('** class name missing **')
-        if args[0] not in HBNBCommand.list_classess:
+        elif args[0] not in HBNBCommand.list_classess:
             print('** class doesn\'t exist **')
-        if (args[0] + '.' + args[1]) in storage.all():
+        elif (args[0] + '.' + args[1]) in storage.all():
             print(storage.all()["{}.{}".format(args[0], args[1])])
         else:
             print('** no instance found **')
