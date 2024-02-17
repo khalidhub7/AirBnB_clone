@@ -44,13 +44,6 @@ class HBNBCommand(cmd.Cmd):
             new__instance = globals()[spliter[0]]()
             return new__instance
 
-    def do_show(self, arg):
-        """show command to prints object representation"""
-        args_list = shlex.split(arg)
-        if self.check_id(arg):
-            print(storage.all()["{}.{}\
-".format(args_list[0], args_list[1])])
-
     def check_id(self, arg):
         """
         check if class name and id exist
@@ -68,6 +61,13 @@ class HBNBCommand(cmd.Cmd):
         if args_list[0]+"."+args_list[1] in storage.all():
             return True
         print("** no instance found **")
+
+    def do_show(self, arg):
+        """show command to prints object representation"""
+        args_list = shlex.split(arg)
+        if self.check_id(arg):
+            print(storage.all()["{}.{}\
+".format(args_list[0], args_list[1])])
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
