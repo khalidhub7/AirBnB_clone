@@ -48,8 +48,11 @@ class HBNBCommand(cmd.Cmd):
         spliter = arg.split()
         if len(spliter) == 0:
             print('** class name missing **')
-        if spliter[0] not in HBNBCommand.classes_defined:
+            return
+        elif spliter[0] not in HBNBCommand.classes_defined:
             print('** class doesn\'t exist **')
-        new__instance = globals()[spliter[0]]()
+            return
+        else:
+            new__instance = globals()[spliter[0]]()
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
