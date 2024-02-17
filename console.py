@@ -3,6 +3,7 @@
 AirBnB_ console'''
 import cmd
 from models import storage
+import shlex
 
 
 class HBNBCommand(cmd.Cmd):
@@ -52,7 +53,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args_list) == 0:
             print("** class name missing **")
             return False
-        if args_list[0] not in HBNBCommand.classes_list:
+        if args_list[0] not in HBNBCommand.classes_defined:
             print("** class doesn't exist **")
             return False
         if len(args_list) < 2:
@@ -62,13 +63,12 @@ class HBNBCommand(cmd.Cmd):
             return True
         print("** no instance found **")
 
-    def do_destroy(self, arg):
-        """destroy command that destroy object"""
+    def do_show(self, arg):
+        """show command to prints object representation"""
         args_list = shlex.split(arg)
         if self.check_id(arg):
-            del storage.all()["{}.{}\
-".format(args_list[0], args_list[1])]
-            storage.save()
+            print(storage.all()["{}.{}\
+".format(args_list[0], args_list[1])])
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
