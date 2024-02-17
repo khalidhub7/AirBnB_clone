@@ -73,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
             return False
         return True
 
-    '''def do_show(self, arg):
+    def do_show(self, arg):
         """show command to prints object representation"""
         args = shlex.split(arg)
         if len(args) == 0:
@@ -82,18 +82,6 @@ class HBNBCommand(cmd.Cmd):
             print('** class doesn\'t exist **')
         elif (args[0] + '.' + args[1]) in storage.all():
             print(storage.all()["{}.{}".format(args[0], args[1])])
-        else:
-            print('** no instance found **')'''
-
-    def do_show(self, arg):
-        """show command to print object representation"""
-        args = shlex.split(arg)
-        if len(args) == 0:
-            print('** class name missing **')
-        elif args[0] not in HBNBCommand.list_classes:
-            print('** class doesn\'t exist **')
-        elif len(args) < 2:
-            print('** instance id missing **')
         else:
             instance_id = "{}.{}".format(args[0], args[1])
             if instance_id in storage.all():
