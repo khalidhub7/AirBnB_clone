@@ -50,10 +50,10 @@ class HBNBCommand(cmd.Cmd):
         if len(myargs) == 0:
             print('** class name missing **')
             return False
-        if myargs[0] not in HBNBCommand.list_classess:
+        if myargs[0] not in HBNBCommand.classes_list:
             print("** class doesn't exist **")
             return False
-        if len(myargs) < 1:
+        if len(myargs) < 2:
             print('** instance id missing **')
             return False
         if myargs[0]+"."+myargs[1] in storage.all():
