@@ -80,7 +80,7 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
         elif args[0] not in HBNBCommand.list_classess:
             print('** class doesn\'t exist **')
-        elif (args[0] + '.' + args[1]) in storage.all():
+        elif args[0] + '.' + args[1] in storage.all():
             print(storage.all()["{}.{}".format(args[0], args[1])])
         else:
             print('** no instance found **')
