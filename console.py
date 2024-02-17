@@ -79,12 +79,12 @@ class HBNBCommand(cmd.Cmd):
         if len(args) < 1:
             print('** class name missing **')
             return False
-        elif args[1] not in HBNBCommand.list_classess:
+        elif args[0] not in HBNBCommand.classes_defined:
             print('** class doesn\'t exist **')
             return False
-        elif (args[1] + '.' + args[2]) in storage.all():
+        elif (args[0] + '.' + args[1]) in storage.all():
             print(storage.all()["{}.{}\
-".format(args[1], args[2])])
+".format(args[0], args[1])])
         print('** no instance found **')
 
     def do_destroy(self, arg):
