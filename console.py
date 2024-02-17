@@ -88,6 +88,7 @@ class HBNBCommand(cmd.Cmd):
             print('** no instance found **')
             return False
         print(storage.all()["{}.{}".format(myargs[0], myargs[1])])
+        return True
 
     def do_destroy(self, arg):
         '''destroy command that destroy object'''
