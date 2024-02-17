@@ -79,10 +79,10 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print('** class name missing **')
             return False
-        elif args[0] not in HBNBCommand.list_classess:
+        if args[0] not in HBNBCommand.list_classess:
             print('** class doesn\'t exist **')
             return False
-        elif (args[0] + '.' + args[1]) in storage.all():
+        if (args[0] + '.' + args[1]) in storage.all():
             print(storage.all()["{}.{}\
 ".format(args[0], args[1])]i)
         else:
