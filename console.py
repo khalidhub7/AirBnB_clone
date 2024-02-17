@@ -74,11 +74,11 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_show(self, arg):
-        """show command to prints object representation"""
-        args_list = shlex.split(arg)
-        if self.check_id(arg):
+        '''show command to prints object representation'''
+        myargs = shlex.split(arg)
+        if self.check_id_exist(arg):
             print(storage.all()["{}.{}\
-".format(args_list[0], args_list[1])])
+".format(myargs[0], myargs[1])])
 
     def do_destroy(self, arg):
         '''destroy command that destroy object'''
