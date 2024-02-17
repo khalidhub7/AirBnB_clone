@@ -42,23 +42,23 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
             print(new.id)
 
-    def check_id_exist(self, arg):
+    def check_cls(self, arg):
         '''
-        check if class && id exist
+        check if class name and id exist
         '''
         myargs = shlex.split(arg)
         if len(myargs) == 0:
-            print("** class name missing **")
+            print('** class name missing **')
             return False
         if myargs[0] not in HBNBCommand.list_classess:
             print("** class doesn't exist **")
             return False
-        if len(myargs) < 2:
-            print("** instance id missing **")
+        if len(myargs) < 1:
+            print('** instance id missing **')
             return False
         if myargs[0]+"."+myargs[1] in storage.all():
             return True
-        print("** no instance found **")
+        print('** no instance found **')
 
     def check_attr_exist(self, arg):
         '''
@@ -76,7 +76,7 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         """show command to prints object representation"""
         args_list = shlex.split(arg)
-        if self.check_id_exist(arg):
+        if self.check_cls(arg):
             print(storage.all()["{}.{}\
 ".format(args_list[0], args_list[1])])
 
@@ -107,7 +107,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         '''update command that update an object'''
-        if self.check_id_exist(arg):
+        if self.check_cls(arg):
             if self.check_attr_exist(arg):
                 args_list = shlex.split(arg)
                 obj = storage.all()[f"{args_list[0]}.{args_list[1]}"]
