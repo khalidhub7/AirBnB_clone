@@ -87,19 +87,19 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
     """show command to print object representation"""
-    args = shlex.split(arg)
-    if len(args) == 0:
-        print('** class name missing **')
-    elif args[0] not in HBNBCommand.list_classes:
-        print('** class doesn\'t exist **')
-    elif len(args) < 2:
-        print('** instance id missing **')
-    else:
-        instance_id = "{}.{}".format(args[0], args[1])
-        if instance_id in storage.all():
-            print(storage.all()[instance_id])
+        args = shlex.split(arg)
+        if len(args) == 0:
+            print('** class name missing **')
+        elif args[0] not in HBNBCommand.list_classes:
+            print('** class doesn\'t exist **')
+        elif len(args) < 2:
+            print('** instance id missing **')
         else:
-            print('** no instance found **')
+            instance_id = "{}.{}".format(args[0], args[1])
+            if instance_id in storage.all():
+                print(storage.all()[instance_id])
+            else:
+                print('** no instance found **')
 
     def do_destroy(self, arg):
         '''destroy command that destroy object'''
