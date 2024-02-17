@@ -80,12 +80,14 @@ class HBNBCommand(cmd.Cmd):
         myargs = shlex.split(arg)
         if len(myargs) == 0:
             print("** class name missing **")
+            return False
         elif myargs[0] not in HBNBCommand.list_classess:
             print("** class doesn't exist **")
-        elif myargs[0]+'.'+myargs[1] in storage.all():
-            print(storage.all()["{}.{}".format(myargs[0], myargs[1])])
+            return False
         elif myargs[0]+'.'+myargs[1] not in storage.all():
             print('** no instance found **')
+            return False
+        print(storage.all()["{}.{}".format(myargs[0], myargs[1])])
 
     def do_destroy(self, arg):
         '''destroy command that destroy object'''
