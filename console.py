@@ -86,7 +86,7 @@ class HBNBCommand(cmd.Cmd):
             print('** no instance found **')'''
 
     def do_show(self, arg):
-    """show command to print object representation"""
+        """show command to print object representation"""
         args = shlex.split(arg)
         if len(args) == 0:
             print('** class name missing **')
