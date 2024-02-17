@@ -44,21 +44,21 @@ class HBNBCommand(cmd.Cmd):
 
     def check_id_exist(self, arg):
         '''
-        check if class && id exist
+        check if class name and id exist
         '''
         myargs = shlex.split(arg)
         if len(myargs) == 0:
-            print("** class name missing **")
+            print('** class name missing **')
             return False
-        if myargs[0] not in HBNBCommand.list_classess:
+        if myargs[0] not in HBNBCommand.classes_defined:
             print("** class doesn't exist **")
             return False
-        if len(myargs) < 2:
-            print("** instance id missing **")
+        if len(myargs) < 1:
+            print('** instance id missing **')
             return False
         if myargs[0]+"."+myargs[1] in storage.all():
             return True
-        print("** no instance found **")
+        print('** no instance found **')
 
     def check_attr_exist(self, arg):
         '''
