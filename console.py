@@ -84,8 +84,9 @@ class HBNBCommand(cmd.Cmd):
             return False
         elif (args[0] + '.' + args[1]) in storage.all():
             print(storage.all()["{}.{}\
-".format(args[0], args[1])]i)
-        print('** no instance found **')
+".format(args[0], args[1])])
+        else:
+            print('** no instance found **')
 
     def do_destroy(self, arg):
         '''destroy command that destroy object'''
