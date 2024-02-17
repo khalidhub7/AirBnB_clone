@@ -39,7 +39,6 @@ class HBNBCommand(cmd.Cmd):
         else:
             new_obj = eval(className[0])()
             storage.save()
-            print(new_obj.id)
     """ def do_create(self, arg):
         '''
         create command to creates a new instance
