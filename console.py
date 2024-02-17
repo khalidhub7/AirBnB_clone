@@ -27,17 +27,17 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        '''
-        create command to creates a new instance
-        '''
-        nameof_class = arg.split()
-        if len(nameof_class) == 0:
+        """Usage: create <class>
+        Create a new class instance and print its id.
+        """
+        argl = parse(arg)
+        if len(argl) == 0:
             print("** class name missing **")
-        elif nameof_class[0] not in HBNBCommand.list_classess:
+        elif argl[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
-            new = eval(nameof_class[0])()
+            print(eval(argl[0])().id)
             storage.save()
-            print(new.id)
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
