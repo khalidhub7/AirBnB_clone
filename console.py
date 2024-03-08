@@ -1,95 +1,87 @@
-#!/usr/bin/python3
-# Importing necessary modules
 from models.engine.file_storage import FileStorage
 from models import storage
 import shlex
 import cmd
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
-    # Setting up command prompt and class list
+    # Prompt displayed for user input
     prompt = "(hbnb) "
-    list_classes = ["BaseModel"]
+    # List of classes available for creating instances
+    classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
 
-    # Creating new instance
     def do_create(self, arg):
-        args = arg.split()
-        if not args:
+        # Command to create a new instance of a class
+        class_name = arg.split()
+        if len(class_name) == 0:
             print("** class name missing **")
-        elif args[0] not in self.list_classes:
+        elif class_name[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
         else:
-            new_instance = eval(args[0])()
+            # Create a new instance of the specified class
+            new_instance = eval(class_name[0])()
             storage.save()
             print(new_instance.id)
 
-    # Checking if ID exists
-    def check_id_exist(self, arg):
+    def check_instance_exists(self, arg):
+        # Helper function to check if an instance exists
         myargs = shlex.split(arg)
-        if len(myargs) < 2:
-            print("** class name missing **")
+        if len(myargs) < 2 or myargs[0]+"."+myargs[1] not in storage.all():
+            print("** no instance found **")
             return False
-        if myargs[0] not in self.list_classes:
-            print("** class doesn't exist **")
-            return False
-        if myargs[0] + "." + myargs[1] in storage.all():
-            return True
-        print("** no instance found **")
+        return True
 
-    # Showing object representation
     def do_show(self, arg):
-        myargs = shlex.split(arg)
-        if self.check_id_exist(arg):
-            print(storage.all()["{}.{}".format(myargs[0], myargs[1])])
+        # Command to show an instance
+        if self.check_instance_exists(arg):
+            print(storage.all()["{}.{}".format(*shlex.split(arg))])
 
-    # Destroying object
     def do_destroy(self, arg):
-        myargs = shlex.split(arg)
-        if self.check_id_exist(arg):
-            del storage.all()["{}.{}".format(myargs[0], myargs[1])]
+        # Command to destroy an instance
+        if self.check_instance_exists(arg):
+            del storage.all()["{}.{}".format(*shlex.split(arg))]
             storage.save()
 
-    # Printing all objects representation
     def do_all(self, arg):
-        if arg == "":
-            print([str(obj) for obj in storage.all().values()])
+        # Command to display all instances of a class
+        if not arg:
+            print([str(storage.all()[key]) for key in storage.all()])
+        elif arg in HBNBCommand.classes:
+            print([str(storage.all()[key]) for key in storage.all() if arg in key])
         else:
-            if arg.split()[0] in self.list_classes:
-                print([str(obj) for obj in storage.all().values() if arg.split()[0] in obj.__class__.__name__])
-            else:
-                print("** class doesn't exist **")
+            print("** class doesn't exist **")
 
-    # Updating an object
     def do_update(self, arg):
-        if self.check_id_exist(arg):
-            args_list = shlex.split(arg)
-            obj = storage.all()["{}.{}".format(args_list[0], args_list[1])]
-            if hasattr(obj, args_list[2]):
-                try:
-                    value = type(getattr(obj, args_list[2]))(args_list[3])
-                    setattr(obj, args_list[2], value)
-                except ValueError:
-                    pass
-            else:
-                value = args_list[3]
-                try:
-                    value = float(value) if '.' in value else int(value)
-                except ValueError:
-                    pass
-                setattr(obj, args_list[2], value)
+        # Command to update an instance
+        if self.check_instance_exists(arg) and len(shlex.split(arg)) >= 4:
+            args = shlex.split(arg)
+            obj = storage.all()["{}.{}".format(*args)]
+            attr = args[2]
+            try:
+                value = eval(args[3])
+            except NameError:
+                value = args[3]
+            setattr(obj, attr, value)
             obj.save()
 
-    # Quitting the program
-    def do_quit(self, line):
+    def do_quit(self, arg):
+        # Command to quit the program
         return True
 
-    # Exiting on end of file
-    def do_EOF(self, line):
+    def do_EOF(self, arg):
+        # Command to handle end of file (Ctrl+D)
         return True
 
-    # Handling empty line
     def emptyline(self):
+        # Handle an empty line
         pass
 
 if __name__ == '__main__':
+    # Start the command loop
     HBNBCommand().cmdloop()
