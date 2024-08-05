@@ -1,64 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="styles/4-common.css">
-    <link rel="stylesheet" type="text/css" href="styles/3-header.css">
-    <link rel="stylesheet" type="text/css" href="styles/3-footer.css">
-    <link rel="stylesheet" type="text/css" href="styles/6-filters.css">
-    <link rel="stylesheet" type="text/css" href="styles/7-places.css">
-    <link rel="icon" type="image/x-icon" href="images/icon.png">
-    <title>air_bnb_project</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirBnB</title>
+    <link rel="stylesheet" href="styles/4-common.css">
+    <link rel="stylesheet" href="styles/3-footer.css">
+    <link rel="stylesheet" href="styles/3-header.css">
+    <link rel="stylesheet" href="styles/6-filters.css">
+    <link rel="stylesheet" href="styles/7-places.css">
+    <link rel="icon" href="images/icon.png">
 </head>
 <body>
     <header>
     </header>
     <div class="container">
         <section class="filters">
-            <div class="locations">
-                <h3>States</h3>
-                <h4>Local</h4>
-                <div class="popover">
-                    <ul>
-                        <li><h2>FANTI</h2></li>
-                        <li><h4>Hotel</h4></li>
-                        <li><h4>Restorant</h4></li>
-                        <li><h2>ATLANTIC</h2></li>
-                        <li><h4>Hotel</h4></li>
-                        <li><h4>Cafe</h4></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="amenities">
-                <h3>Amenities</h3>
-                <h4>Viva</h4>
-                <div class="popover">
-                    <ul>
-                        <li><h2>VIVIAN</h2></li>
-                        <li><h4>Manzakin</h4></li>
-                        <li><h4>CodeAsgan</h4></li>
-                        <li><h2>FIOREE</h2></li>
-                        <li><h4>Kingdom</h4></li>
-                        <li><h4>Fantasia</h4></li>
-                    </ul>
-                </div>
-            </div>
             <button>
                 Search
             </button>
-        </section>
-        <section class="places">
-            <h1>
-                Places
-            </h1>
-            <article>
-                <h2>Taghazout</h2>
-                <h2>Imiouaddar</h2>
-                <h2>Sidi Wassay</h2>
-            </article>
+            <div class="locations">
+                <h3>States</h3>
+                <h4>Select a state ...</h4>
+                <ul class="popover">
+                    <li><h2>Souss-Massa</h2></li>
+                    <ul class="cities">
+                        <li>Agadir</li>
+                        <li>Taroudant</li>
+                        <li>Tiznit</li>
+                    </ul>
+                    <li><h2>Casablanca-Settat</h2></li>
+                    <ul class="cities">
+                        <li>Casablanca</li>
+                        <li>Mohammedia</li>
+                        <li>El Jadida</li>
+                    </ul>
+                </ul>
+            </div>
+            <div class="amenities">
+                <h3>Amenities</h3>
+                <h4>Select amenities ...</h4>
+                <ul class="popover">
+                    <li>Sidi Wassay Beach</li>
+                    <li>Restaurant La Palmeraie</li>
+                    <li>Hotel Tildi</li>
+                    <li>Souk El Had d'Agadir</li>
+                    <li>Agadir Kasbah</li>
+                </ul>
+            </div>
         </section>
     </div>
+
+
+
+    <h1 class="places_title">Places</h1>
+    <section class="places">
+        <article>
+            <h2>My home</h2>
+        </article>
+        <article>
+            <h2>Tiny house</h2>
+        </article>
+        <article>
+            <h2>A suite</h2>
+        </article>
+    </section>
+
+
+
+
     <footer>
-        <p>Best School</p>
+        Best School
     </footer>
 </body>
 </html>

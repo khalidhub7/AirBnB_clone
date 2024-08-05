@@ -1,104 +1,130 @@
 .places {
-}
-
-.places h1 {
-    font-size: 30px;
-}
-
-.places .all_articles {
-    flex-grow: 1;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* horizontally */
     flex-wrap: wrap;
+    /* background-color: yellow; */
+    /* calc((100% - (780px + 160px + 4px)) / 2) */
+/* 780px: article widths, 160px: margins & paddings, 4px: borders */
+    padding-left: calc((100% - (390px + 390px + 80px + 80px + 4px)) / 2);
+    padding-right: calc((100% - (390px + 390px + 80px + 80px + 4px)) / 2);
+}
+.places_title {
+    font-size: 30px;
+    margin-left: 17%;
+    /* background-color: #FF5A5F; */
+    width: fit-content;
+    margin-bottom: -2px;
+    margin-top: -8px;
 }
 
-article {
-    text-align: center;
+.places article {
     width: 390px;
     padding: 20px;
     margin: 20px;
-    border: solid #FF5A5F 1px;
-    border-radius: 4px;
-    /* display: flex; */
-    /* flex-wrap: wrap; */
+    border: #FF5A5F 1px solid;
 }
-article div {
-    display: flex;
-    justify-content: center;
+
+.places article h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-top: -5px;
+    margin-bottom: 55px;
 }
 
 .price_by_night {
     color: #FF5A5F;
-    border: solid #FF5A5F 4px;
-    border-radius: 50%;
-    width: 60px;
+    border: #e04c51 4px solid;
+    width: fit-content;
     height: 60px;
+    min-width: 60px;
+    min-height: 60px;
     font-size: 30px;
-    text-align: right;
-    line-height: 60px;
-}
+    border-radius: 50%;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    left: 82%;
+    top: -85px;
+}
 .information {
     height: 80px;
-    border-top: solid #DDDDDD 1px;
-    border-bottom: solid #DDDDDD 1px;
+    border-top: #DDDDDD 1px solid;
+    border-bottom: #DDDDDD 1px solid;
+    position: relative;
+    /* calc() 
+    60px: height of .price_by_night
+    8px : borders */
+    top: calc(-60px - 8px);
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .max_guest {
-    background-image: url("../images/icon_group.png");
-    background-repeat: no-repeat;
-    background-position: top center;
-
-    line-height: 120px;
     width: 100px;
-    text-align: center !important;
+    height: 80px;
+    background-image: url(../images/icon_group.png);
+    /* background-color: yellow; */
+    background-repeat: no-repeat;
+    background-position: center top;
+    position: relative;
+    margin-top: 5%;
 }
 
+.max_guest p {
+    position: absolute;
+    bottom: 20%;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
 
 .number_rooms {
-    background-image: url("../images/icon_bed.png");
-    background-repeat: no-repeat;
-    background-position: top center;
-    line-height: 120px;
     width: 100px;
-    text-align: center;
+    height: 80px;
+    background-image: url(../images/icon_bed.png);
+    /* background-color: yellow; */
+    background-repeat: no-repeat;
+    background-position: center top;
+    position: relative;
+    margin-top: 5%;
 }
 
-footer {
-    position: relative;
+.number_rooms p {
+    position: absolute;
+    bottom: 20%;
+    width: 100%;
+    text-align: center;
+    margin: 0;
 }
 
 .number_bathrooms {
-    background-image: url("../images/icon_bath.png");
-    background-repeat: no-repeat;
-    background-position: top center;
-    line-height: 120px;
     width: 100px;
+    height: 80px;
+    background-image: url(../images/icon_bath.png);
+    /* background-color: yellow; */
+    background-repeat: no-repeat;
+    background-position: center top;
+    position: relative;
+    margin-top: 5%;
 }
 
-article h2 {
-    font-size: 30px;
-    /* margin-right: 100px;
-    margin-left: 59px; */
-    margin-top: 0;
-    margin-bottom: 15%;
-    flex-grow: 1;
+.number_bathrooms p {
+    position: absolute;
+    bottom: 20%;
+    width: 100%;
+    text-align: center;
+    margin: 0;
 }
 
 .user {
-    font-size: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: left;
-    /* padding-top: 20px; */
+    margin-top: -14%;
+    width: fit-content;
 }
 
-.description {
-    margin-top: 0;
-    text-align: left;
-    /* padding-top: 20px; */
-    font-size: 16px;
+body {
+    margin-bottom: 20%;
 }
